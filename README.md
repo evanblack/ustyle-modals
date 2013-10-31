@@ -1,6 +1,6 @@
 # Ustyle modals
 
-Yet another modal dialog script, but made for uSwitch with the sort of options we need, and yummy responsive.
+Yet another modal dialog script, but made for uSwitch with the sort of options we need, and with excellent responsiveness.
 
 Inspired in a large way by CSS modals [drublic.github.io/css-modal/](http://drublic.github.io/css-modal/)
 
@@ -28,7 +28,11 @@ that's it. The javascript is auto-running and you're ready to build a modal pop-
 
 ## Modes of use
 
-### Link triggered
+### Link triggered Non-JS
+
+Not yet tested, but just using CSS.
+
+### Link triggered JS delegated event
 
 In this mode, you can just add a class to the link you want to trigger the modal:
 
@@ -61,16 +65,16 @@ By default there's only one modal scaffold in the page (with an id "us-modal-0")
 Extra classes to add to the modal (eg 'footer-green big-text')
 
     type
-The type of content to pull into the modal. Choose from 'inpage' (pull a hidden element into the modal), 'ajax', 'iframe' (NOT YET BUILT!) or 'prebuilt' (the modal is self-contained, prebuilt and hidden). Default is 'prebuilt', but the script will try and determine of it's 'inpage' or 'ajax' based on the target (ie the link) to pull into the modal.
+The type of content to pull into the modal. Choose from 'inpage' (pull a hidden element into the modal and force it as "display:block"), 'ajax' (pull content from a url), 'iframe' (NOT YET BUILT!) or 'prebuilt' (the modal is self-contained, prebuilt and hidden). Default is 'prebuilt', but the script will try and determine of it's 'inpage' or 'ajax' based on the target (ie the link) to pull into the modal.
 
     width
-Five widths are available: "XS,S,M,L,XL" going from 400px up to 800px wide. Why not allow arbitrary widths? Because then we'd have trouble spotting when the viewport is smaller than the modal without resorting to javascript events.
+Five widths are available: "XS,S,M,L,XL" going from 400px up to 800px wide. Why not allow arbitrary widths? Because then we'd have trouble spotting when the viewport is smaller than the modal and making them responsive without resorting to javascript events.
 
     height
-Only used for type="iframe". Otherwise the modal extends in height until it hits a maximum.
+Only used for type="iframe". Otherwise the modal extends in height until it hits a maximum set in the stylesheet.
 
     target
-The content to pull into the modal (not used for type="prebuilt"). Can be set to "#nodeid" or ".nodeclass" for type="inpage" use, or 'http://www.bob.com/page.html' or '/page.html' or 'page.html' for type="ajax/iframe". If you're triggering a link and target is not set, the link href will be used instead.
+The content to pull into the modal (not used for type="prebuilt"). Can be set to "#nodeid" or ".nodeclass" for type="inpage" use, or 'http://www.bob.com/page.html' or '/page.html' or 'page.html' for type="ajax/iframe". Although it's crucial, it's also optional if you're triggering a link and data-target="url" is not set, as the link href="url" will be used instead.
 
     targetextra
 Only used for type="ajax" calls. Allows you to specify an element within the document received. For example, target="test.html", targetextra="#bob" will only pull the first element with a CSS id "bob" from the document "test.html" and place it inside the modal
@@ -86,7 +90,7 @@ Set to 'true' if you'd prefer not to have a close box link in the modal header.
 
 ### Footer
 
-The modal footer doesn't appear by default, but if you specify it, it will appear fixed to the bottom of it.
+The modal footer doesn't appear by default, but if you specify it, it will appear fixed to the bottom of the modal.
 
     showfooter
 If set to 'true', the modal footer will show. Duh. But then if "formurl" or "footerhtml" below are specified, this will also be set as 'true' by default.
@@ -108,19 +112,19 @@ Ok this is funky. You can add multiple input fields in json form. eg
 {
  'field-name-1':{
   'type':'hidden',
-  'name':'username',
-  'value':'bob',
-  'id':'cssid',
-  'class':'cssclass',
-  'placeholder':'placeholder'
+  'name':'blah',
+  'value':'blah',
+  'id':'blah',
+  'class':'blah',
+  'placeholder':'blah'
  },
  'field-name-1':{
   'type':'hidden',
-  'name':'email',
-  'value':'bob@bob.com',
-  'id':'cssid2',
-  'class':'cssclass',
-  'placeholder':'placeholder'
+  'name':'blah',
+  'value':'blah',
+  'id':'blah',
+  'class':'blah',
+  'placeholder':'blah'
  }
 }
 
@@ -128,11 +132,11 @@ Ok this is funky. You can add multiple input fields in json form. eg
 Again, the button is in json form, if a little simpler:
 {
  'field-name-1':{
-  'id':'cssid3',
-  'class':'cssclass',
-  'text':'Buy now!'
+  'id':'blah',
+  'class':'blah',
+  'text':'blah'
  }
         
 ## Notes
 
-- All the arguments/variables are in lower case, because reading data-types from elements lowercases everything.
+- All the arguments/variables are in lower case, because reading data-types from elements lowercases the keys anyway.
