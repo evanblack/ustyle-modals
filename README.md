@@ -8,7 +8,7 @@ THIS IS AN EARLY INCOMPLETE VERSION
 
 ## Why?
 
-We used a bundle of different frameworks just for modals (bootstrap, jqueryUI, fancybox), and some of them weren't responsive, some had more features than we'll even need, most didn't have enough features, and all used javascript for much of the layout engine (err, no thanks).
+We used a bundle of different frameworks just for modals (bootstrap, jqueryUI, fancybox), and some of them weren't responsive, some had more features than we'll ever need, most didn't have enough features, and all used javascript for much of the layout engine (err, no thanks).
 
 ## Requirements
 
@@ -54,20 +54,20 @@ You can also trigger a modal programmatically in JS, with exactly the same optio
       'modalclass':'green'
     });
 
-## Modifiers
+## Options
 
-### Basic
+### Basic options
 
-    modalid
+    modalid (default '#us-modal-0')
 By default there's only one modal scaffold in the page (with an id "us-modal-0"), which is automatically created on page load and has it's contents replaced each time a link is clicked. But this allows the option to call multiple hidden prebuilt modals. Can be a CSS id "#this-modal" or the first available CSS class ".those-modals"
 
     modalclass
 Extra classes to add to the modal (eg 'footer-green big-text')
 
-    type
+    type (default 'prebuilt', but uses the url/target to determine the option, if empty)
 The type of content to pull into the modal. Choose from 'inpage' (pull a hidden element into the modal and force it as "display:block"), 'ajax' (pull content from a url), 'iframe' (NOT YET BUILT!) or 'prebuilt' (the modal is self-contained, prebuilt and hidden). Default is 'prebuilt', but the script will try and determine of it's 'inpage' or 'ajax' based on the target (ie the link) to pull into the modal.
 
-    width
+    width (defaults to M for medium - 600px wide)
 Five widths are available: "XS,S,M,L,XL" going from 400px up to 800px wide. Why not allow arbitrary widths? Because then we'd have trouble spotting when the viewport is smaller than the modal and making them responsive without resorting to javascript events.
 
     height
@@ -88,7 +88,7 @@ The text to add into the modal header. Yes it can be HTML is you really want
     noClose
 Set to 'true' if you'd prefer not to have a close box link in the modal header.
 
-### Footer
+### Footer options
 
 The modal footer doesn't appear by default, but if you specify it, it will appear fixed to the bottom of the modal.
 
@@ -140,3 +140,4 @@ Again, the button is in json form, if a little simpler:
 ## Notes
 
 - All the arguments/variables are in lower case, because reading data-types from elements lowercases the keys anyway.
+- examples to come.
