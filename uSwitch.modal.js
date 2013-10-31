@@ -98,7 +98,7 @@ uSwitch.modal = (function() {
     var linkJQ = $(link);
     var config = linkJQ.data();
     // fill in gaps: if we're not given a target, use the link href
-    if (!config.target && !config.targetJQ) {
+    if (!config.target && !config.targetjq) {
       config.target = linkJQ.attr('href');
     }
     // fill in gaps: if we're not given a config.type, try and figure it out by the target given (ie the url or selector in the href)
@@ -124,14 +124,14 @@ uSwitch.modal = (function() {
   }
 
   // clean the modal of content after it's closed
-  var resetModal = function(noReset,modal) {
-    var modalJQ = jqOrId(modal);
-    var noReset = noReset || modalJQ.data('noreset') || false;
-    modalJQ.attr('class','').addClass('us-modal-box');
-    if (!noReset) {
-      modalJQ.find('.us-modal-title').text('');
-      modalJQ.find('.us-modal-content').text('');
-      modalJQ.find('footer').text('');
+  var resetModal = function(noreset,modal) {
+    var modaljq = jqOrId(modal);
+    var noreset = noreset || modaljq.data('noreset') || false;
+    modaljq.attr('class','').addClass('us-modal-box');
+    if (!noreset) {
+      modaljq.find('.us-modal-title').text('');
+      modaljq.find('.us-modal-content').text('');
+      modaljq.find('footer').text('');
     }
   }
 
@@ -139,22 +139,22 @@ uSwitch.modal = (function() {
   var setModalTitle = function(title,modal) {
     if (!title)
       return
-    var modalJQ = jqOrId(modal);
-    modalJQ.find('.us-modal-title').html(title);
+    var modaljq = jqOrId(modal);
+    modaljq.find('.us-modal-title').html(title);
   }
 
   // set the modal content (type: inpage)
-  var setModalContentInPage = function(targetJQ,modal) {
-    var modalJQ = jqOrId(modal);
-    var content = targetJQ.first().clone().css('display','block');
-    modalJQ.find('.us-modal-content').append(content);
+  var setModalContentInPage = function(targetjq,modal) {
+    var modaljq = jqOrId(modal);
+    var content = targetjq.first().clone().css('display','block');
+    modaljq.find('.us-modal-content').append(content);
   }
 
   // set the modal content (type: ajax)
   var setModalContentAjax = function(target,modal) {
-    var modalJQ = jqOrId(modal);
+    var modaljq = jqOrId(modal);
     // add a spinner
-    modalJQ.find('.us-modal-content').append('<div id="us-modal-loading"></div>');
+    modaljq.find('.us-modal-content').append('<div id="us-modal-loading"></div>');
     var opts = {
       lines: 13, // The number of lines to draw
       length: 6, // The length of each line
@@ -172,7 +172,7 @@ uSwitch.modal = (function() {
     };
     var spinTarget = $('#us-modal-loading')[0];
     var spinner = new Spinner(opts).spin(spinTarget);
-    modalJQ.find('.us-modal-content').load(target,function() {
+    modaljq.find('.us-modal-content').load(target,function() {
       // remove spinner
       $('#us-spin-container').remove();
     });
@@ -185,93 +185,93 @@ uSwitch.modal = (function() {
 
   var setModalFooter = function(config) {
     var config = config || {};
-    var modalId = config.modalid || modalDefaultId;
-    var modalJQ = $(modalId);
-    var footerHtml = config.footerhtml || false;
-    var formMethod = config.formmethod || 'POST';
-    var formUrl = config.formurl || false;
-    var formHtml = config.formhtml || false;
-    var formInputs = readJsonConfig(config.forminputs) || {};
-    var formButton = readJsonConfig(config.formbutton) || {};
-    formButton.text = formButton.text || 'submit';
+    var modalid = config.modalid || modalDefaultId;
+    var modaljq = $(modalid);
+    var footerhtml = config.footerhtml || false;
+    var formmethod = config.formmethod || 'POST';
+    var formurl = config.formurl || false;
+    var formhtml = config.formhtml || false;
+    var forminputs = readJsonConfig(config.forminputs) || {};
+    var formbutton = readJsonConfig(config.formbutton) || {};
+    formbutton.text = formbutton.text || 'submit';
     // form instead of html?
-    if (!footerHtml && formUrl) {
-      footerHtml = '<form action="' + formUrl + '" method="' + formMethod + '">';
-      $.each(formInputs,function(i,el){
-        footerHtml += '<input' + ( el['id'] ? ' id="' + el['id'] + '"':'') + ( el['class'] ? ' class="' + el['class'] + '"':'') + ' type="' + el.type + '" name="' + i + '" value="' + el.value + '" placeholder="' + el.placeholder + '" />';
+    if (!footerhtml && formurl) {
+      footerhtml = '<form action="' + formurl + '" method="' + formmethod + '">';
+      $.each(forminputs,function(i,el){
+        footerhtml += '<input' + ( el['id'] ? ' id="' + el['id'] + '"':'') + ( el['class'] ? ' class="' + el['class'] + '"':'') + ' type="' + el.type + '" name="' + i + '" value="' + el.value + '" placeholder="' + el.placeholder + '" />';
       })
-      footerHtml += formHtml;
-      footerHtml += '<button id="' + formButton['id'] + '" class="btn ' + formButton['class'] + '" type="submit">' + formButton['text'] + '</button>';
-      footerHtml += '</form>';
+      footerhtml += formhtml;
+      footerhtml += '<button id="' + formbutton['id'] + '" class="btn ' + formbutton['class'] + '" type="submit">' + formbutton['text'] + '</button>';
+      footerhtml += '</form>';
     }
-    modalJQ.find('footer').append(footerHtml);
+    modaljq.find('footer').append(footerhtml);
   }
 
   // open a modal
   var openModal = function(link,config) {
     var config = config || readLinkConfig(link) || {};
-    var modalId = config.modalid || modalDefaultId; // by default there's only one modal in the page. But this allows the option to call multiple hidden prebuilt modals.
-    var modalClass = config.modalclass || false; // extra classes to add to the modal (eg 'footer-green big-text')
+    var modalid = config.modalid || modalDefaultId; // by default there's only one modal in the page. But this allows the option to call multiple hidden prebuilt modals.
+    var modalclass = config.modalclass || false; // extra classes to add to the modal (eg 'footer-green big-text')
     var type = config.type || false; // the type of content to pull into the modal. Choose from 'inpage' (pull a hidden ID into the modal), 'ajax', 'iframe' or 'prebuilt' (the modal is self-contained, prebuilt and hidden). Default is 'prebuilt'.
     var width = config.width || 'm';  // medium is the default width (600px wide)
     var height = config.height || '300'; // used for type = 'iframe' only
     var target = config.target || false; // could be '#nodeid' or '.nodeclass' for inpage use, 'http://www.bob.com/page.html' or '/page.html' or 'page.html' for ajax/iframe.
-    var targetExtra = config.targetextra || false; // used in ajax requests, a CSS selector modifier that only retrieves a specific element of a page.
+    var targetextra = config.targetextra || false; // used in ajax requests, a CSS selector modifier that only retrieves a specific element of a page.
     var title = config.title || false; // title bar of modal
-    var noClose = config.noclose || false; // hide the close button in the modal header. should be true or false
-    var formUrl = config.formurl || false;
-    var footerHtml = config.footerhtml || false;
+    var noclose = config.noclose || false; // hide the close button in the modal header. should be true or false
+    var formurl = config.formurl || false;
+    var footerhtml = config.footerhtml || false;
     // look to setModalFooter for additional config for setting up the modal footer
-    var showFooter = config.showfooter || false; // show the modal footer. should be true or false
-    if (!showFooter && (formUrl || footerHtml)) // if we don't ask to show the footer, but do have a form or html, add the footer in anyway
-      showFooter = true;
-    var noReset = config.noreset || false; // don't reset the modal when it's closed (ie, don't wipe any content). should be true or false
-    var rootJQ = $('html');
-    var modalJQ = $(modalId);
+    var showfooter = config.showfooter || false; // show the modal footer. should be true or false
+    if (!showfooter && (formurl || footerhtml)) // if we don't ask to show the footer, but do have a form or html, add the footer in anyway
+      showfooter = true;
+    var noreset = config.noreset || false; // don't reset the modal when it's closed (ie, don't wipe any content). should be true or false
+    var rootjq = $('html');
+    var modaljq = $(modalid);
     // let the modal know if it shouldn't have the data reset
-    if (noReset)
-      modalJQ.data('noreset','1');
+    if (noreset)
+      modaljq.data('noreset','1');
     // clear the modal
-    resetModal(noReset,modalJQ);
+    resetModal(noreset,modaljq);
     // set title
-    setModalTitle(title,modalJQ);
+    setModalTitle(title,modaljq);
     // set content
     switch(type) {
       case 'inpage':
-        var targetJQ = config.targetjq || $(target) || false; // used for inpage only
-        setModalContentInPage(targetJQ,modalJQ);
+        var targetjq = config.targetjq || $(target) || false; // used for inpage only
+        setModalContentInPage(targetjq,modaljq);
         break;
       case 'ajax':
-        if (targetExtra) {
-          target = target + ' ' + targetExtra;
+        if (targetextra) {
+          target = target + ' ' + targetextra;
         }
-        setModalContentAjax(target,modalJQ);
+        setModalContentAjax(target,modaljq);
         break;
       case 'iframe':
-        setModalContentIframe(target,height,modalJQ);
+        setModalContentIframe(target,height,modaljq);
         break;
       default:
-        // do nothing about content, just reveal the modal (for use cases where the modal is pre-built but hidden - remember to use the "noReset" config setting)
+        // do nothing about content, just reveal the modal (for use cases where the modal is pre-built but hidden - remember to use the "noreset" config setting)
     }
     // set footer
-    if (showFooter)
-      setModalFooter(config,modalJQ);
+    if (showfooter)
+      setModalFooter(config,modaljq);
     // open modal/set the width
-    rootJQ.addClass('us-modal-ready');
-    modalJQ.addClass('us-modal-' + width + (noClose?' us-modal-noclose':'') + (showFooter?' us-modal-footer':'') + (modalClass?' ' + modalClass:''));
+    rootjq.addClass('us-modal-ready');
+    modaljq.addClass('us-modal-' + width + (noclose?' us-modal-noclose':'') + (showfooter?' us-modal-footer':'') + (modalclass?' ' + modalclass:''));
     setTimeout(function(){
-      rootJQ.removeClass('us-modal-ready').addClass('us-modal-on');
+      rootjq.removeClass('us-modal-ready').addClass('us-modal-on');
     },10);
   }
 
   // close a modal
   var closeModal = function(modal) {
-    var rootJQ = $('html');
-    var modalJQ = jqOrId(modal) || $(modalDefaultId);
-    rootJQ.removeClass('us-modal-on').addClass('us-modal-ready');
+    var rootjq = $('html');
+    var modaljq = jqOrId(modal) || $(modalDefaultId);
+    rootjq.removeClass('us-modal-on').addClass('us-modal-ready');
     setTimeout(function(){
-      rootJQ.removeClass('us-modal-ready');
-      resetModal(false,modalJQ);
+      rootjq.removeClass('us-modal-ready');
+      resetModal(false,modaljq);
     },400);
   }
   
