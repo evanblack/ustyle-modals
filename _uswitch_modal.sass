@@ -1,0 +1,374 @@
+.us-modal-on body
+  height: 100%
+  overflow: hidden
+
+.us-modal-overlay
+  display: none
+  position: fixed
+  top: 0
+  right: 0
+  bottom: 0
+  left: 0
+  z-index: 9998
+  background-color: #005a7e
+  opacity: 0
+  -webkit-transition: opacity 0.4s
+  -moz-transition: opacity 0.4s
+  transition: opacity 0.4s
+  .us-modal-ready &
+    display: block
+  .us-modal-on &
+    display: block
+    opacity: 0.7
+.us-modal-box
+  display: none
+  position: fixed
+  left: 50%
+  top: 30px
+  top: 3vh
+  z-index: 9999
+  width: 600px
+  margin: 0 0 0 -300px
+  padding: 0
+  background: #fff
+  opacity: 0
+  overflow: visible
+  +boxsizing(border-box)
+  -webkit-transform: scale(0.9)
+  -moz-transform: scale(0.9)
+  transform: scale(0.9)
+  -webkit-transition: opacity,-webkit-transform 0.2s,0.2s
+  -moz-transition: opacity,-moz-transform 0.2s,0.2s
+  transition: opacity,transform 0.2s,0.2s
+  .us-modal-ready &
+    display: block
+  .us-modal-on &
+    display: block
+    opacity: 1
+    -webkit-transform: scale(1) translateY(0)
+    -moz-transform: scale(1) translateY(0)
+    transform: scale(1) translateY(0)
+  header,footer
+    padding: 0.3em 2.3em 0.3em 0.5em
+    min-height: 1.4em
+    position: relative
+    color: #fff
+    background-color: #00B7FF
+    font-family: $heading-font-regular
+    font-size: 36px
+    font-weight: normal
+  footer
+    display: none
+    position: absolute
+    bottom: -62px
+    left: 0
+    right: 0
+    height: 34px
+    padding: 14px 16px
+    color: #333
+    background-color: #eee
+    font-size: 1em
+    h3,h4
+      float: left
+      font-size: 1.2em
+      margin: 0.3em 0
+      font-family: $heading-font-bold
+      font-weight: normal
+    h4
+      font-size: 1em
+      margin: 0.5em 0
+    p
+      float: left
+      margin: 0.5em 0
+    b 
+      font-family: $heading-font-bold
+      font-weight: normal
+    button
+      float: right
+  h2
+    font-weight: normal
+.us-modal-xs
+  width: 400px
+  margin-left: -200px
+.us-modal-s
+  width: 500px
+  margin-left: -250px
+.us-modal-l
+  width: 700px
+  margin-left: -350px
+.us-modal-xl
+  width: 800px
+  margin-left: -400px
+.us-modal-title
+  margin: 0
+  font-size: 1em
+.us-modal-close
+  position: absolute
+  right: 0
+  top: 0
+  bottom: 0
+  width: 2em
+  background-color: #3FC9FF
+  
+  background: -moz-linear-gradient(top, #DF4A3A 0%, #DF4A3A 50%, #3FC9FF 50%, #3FC9FF 100%) /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#DF4A3A), color-stop(50%,#DF4A3A), color-stop(50%,#3FC9FF), color-stop(100%,#3FC9FF)) /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #DF4A3A 0%,#DF4A3A 50%,#3FC9FF 50%,#3FC9FF 100%) /* Chrome10+,Safari5.1+ */
+  background: -ms-linear-gradient(top, #DF4A3A 0%,#DF4A3A 50%,#3FC9FF 50%,#3FC9FF 100%) /* IE10+ */
+  background: linear-gradient(to bottom, #DF4A3A 0%,#DF4A3A 50%,#3FC9FF 50%,#3FC9FF 100%) /* W3C */
+  background-size: 100% 200%
+  background-position: 0 100%
+
+  text-indent: -9em
+  overflow: hidden
+  -webkit-transition: background-position 200ms
+  -moz-transition: background-position 200ms
+  transition: background-position 200ms
+
+  -webkit-tap-highlight-color: #DF4A3A
+  &:before
+    position: absolute
+    top: 0.5em
+    left: 0
+    right: 0
+    content: "\2715"
+    color: #fff
+    font-family: "uswitch-icon"
+    font-size: 1em
+    text-indent: 0
+    text-align: center
+    line-height: 1
+.no-touch .us-modal-close:hover
+  background-position: 0 0
+.us-modal-noclose 
+  header
+    margin-right: 0.5em
+  .us-modal-close
+    display: none
+.us-modal-content
+  max-height: 420px
+  max-height: 78vh
+  padding: 1.2em
+  overflow: auto
+.us-modal-footer
+  .us-modal-content
+    max-height: 350px
+    max-height: 62vh
+  footer
+    display: block
+#us-modal-loading
+  width: 1px 
+  height: 35px
+  margin: 40px auto 10px
+
+
+// vertical squish
+
+@media screen and (max-height: 650px)
+  .us-modal-box,.us-modal-xl
+    header
+      font-size: 24px
+    footer
+      bottom: -50px
+      padding: 8px 16px
+  .us-modal-content
+    max-height: 250px
+    max-height: 62vh
+
+
+// width - XL 800px
+
+@media screen and (max-width: 800px)
+  .us-modal-on .us-modal-overlay
+    display: none
+  .us-modal-xl 
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    width: auto
+    max-height: 100%
+    margin: 0
+    opacity: 1
+    -webkit-transform: translateY(110%)
+    -moz-transform: translateY(110%)
+    transform: translateY(110%)
+    -webkit-overflow-scrolling: touch
+    .us-modal-content
+      position: absolute
+      top: 72px
+      left: 0
+      right: 0
+      bottom: 0
+      max-height: 9999em
+    &.us-modal-footer
+      .us-modal-content
+        bottom: 72px
+      footer
+        bottom: 0
+
+@media screen and (max-width: 800px) and (max-height: 650px)
+  .us-modal-box.us-modal-xl 
+    .us-modal-content
+      top: 48px
+    &.us-modal-footer
+      .us-modal-content
+        bottom: 50px
+
+
+
+// width - L 700px
+
+@media screen and (max-width: 700px)
+  .us-modal-on .us-modal-overlay
+    display: none
+  .us-modal-l 
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    width: auto
+    max-height: 100%
+    margin: 0
+    opacity: 1
+    -webkit-transform: translateY(110%)
+    -moz-transform: translateY(110%)
+    transform: translateY(110%)
+    -webkit-overflow-scrolling: touch
+    .us-modal-content
+      position: absolute
+      top: 72px
+      left: 0
+      right: 0
+      bottom: 0
+      max-height: 9999em
+    &.us-modal-footer
+      .us-modal-content
+        bottom: 72px
+      footer
+        bottom: 0
+
+@media screen and (max-width: 700px) and (max-height: 650px)
+  .us-modal-box.us-modal-l 
+    .us-modal-content
+      top: 48px
+    &.us-modal-footer
+      .us-modal-content
+        bottom: 50px
+
+
+
+// width - M (default) 600px
+
+@media screen and (max-width: 600px)
+  .us-modal-on .us-modal-overlay
+    display: none
+  .us-modal-box 
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    width: auto
+    max-height: 100%
+    margin: 0
+    opacity: 1
+    -webkit-transform: translateY(110%)
+    -moz-transform: translateY(110%)
+    transform: translateY(110%)
+    -webkit-overflow-scrolling: touch
+    .us-modal-content
+      position: absolute
+      top: 72px
+      left: 0
+      right: 0
+      bottom: 0
+      max-height: 9999em
+
+@media screen and (max-width: 600px) and (max-height: 650px)
+  .us-modal-box 
+    .us-modal-content
+      top: 48px
+    &.us-modal-footer
+      .us-modal-content
+        bottom: 50px
+
+
+
+// width - S 500px
+
+@media screen and (max-width: 500px)
+  .us-modal-on .us-modal-overlay
+    display: none
+  .us-modal-s 
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    width: auto
+    max-height: 100%
+    margin: 0
+    opacity: 1
+    -webkit-transform: translateY(110%)
+    -moz-transform: translateY(110%)
+    transform: translateY(110%)
+    -webkit-overflow-scrolling: touch
+    .us-modal-content
+      position: absolute
+      top: 72px
+      left: 0
+      right: 0
+      bottom: 0
+      max-height: 9999em
+    &.us-modal-footer
+      .us-modal-content
+        bottom: 72px
+      footer
+        bottom: 0
+
+@media screen and (max-width: 500px) and (max-height: 650px)
+  .us-modal-box.us-modal-s
+    .us-modal-content
+      top: 48px
+    &.us-modal-footer
+      .us-modal-content
+        bottom: 50px
+
+
+
+// width - XS 400px
+
+@media screen and (max-width: 400px)
+  .us-modal-on .us-modal-overlay
+    display: none
+  .us-modal-xs 
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    width: auto
+    max-height: 100%
+    margin: 0
+    opacity: 1
+    -webkit-transform: translateY(110%)
+    -moz-transform: translateY(110%)
+    transform: translateY(110%)
+    -webkit-overflow-scrolling: touch
+    .us-modal-content
+      position: absolute
+      top: 72px
+      left: 0
+      right: 0
+      bottom: 0
+      max-height: 9999em
+    &.us-modal-footer
+      .us-modal-content
+        bottom: 72px
+      footer
+        bottom: 0
+
+@media screen and (max-width: 400px) and (max-height: 650px)
+  .us-modal-box.us-modal-xs
+    .us-modal-content
+      top: 48px
+    &.us-modal-footer
+      .us-modal-content
+        bottom: 50px
