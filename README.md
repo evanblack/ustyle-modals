@@ -59,16 +59,16 @@ You can also trigger a modal programmatically in JS, with exactly the same optio
 ### Basic options
 
     modalid (default '#us-modal-0')
-By default there's only one modal scaffold in the page (with an id "us-modal-0"), which is automatically created on page load and has it's contents replaced each time a link is clicked. But this allows the option to call multiple hidden prebuilt modals. Can be a CSS id "#this-modal" or the first available CSS class ".those-modals"
+By default there's only one modal scaffold in the page (with an id "us-modal-0"), which is automatically created on page load and has it's contents replaced each time a link is clicked. But this option allows the calling of multiple hidden prebuilt modals. Can be a CSS id "#this-modal" or the first available CSS class ".those-modals"
 
     modalclass
-Extra classes to add to the modal (eg 'footer-green big-text')
+Extra CSS classes to add to the modal (eg 'footer-green big-text')
 
     type (default 'prebuilt', but uses the url/target to determine the option, if empty)
 The type of content to pull into the modal. Choose from 'inpage' (pull a hidden element into the modal and force it as "display:block"), 'ajax' (pull content from a url), 'iframe' (NOT YET BUILT!) or 'prebuilt' (the modal is self-contained, prebuilt and hidden). Default is 'prebuilt', but the script will try and determine of it's 'inpage' or 'ajax' based on the target (ie the link) to pull into the modal.
 
     width (defaults to M for medium - 600px wide)
-Five widths are available: "XS,S,M,L,XL" going from 400px up to 800px wide. Why not allow arbitrary widths? Because then we'd have trouble spotting when the viewport is smaller than the modal and making them responsive without resorting to javascript events.
+Five widths are available: "XS,S,M,L,XL" ranging from 400px up to 800px wide. Why not allow arbitrary widths? Because then we'd have trouble spotting when the viewport is smaller than the modal and making them responsive without resorting to javascript events.
 
     height
 Only used for type="iframe". Otherwise the modal extends in height until it hits a maximum set in the stylesheet.
@@ -83,7 +83,7 @@ Only used for type="ajax" calls. Allows you to specify an element within the doc
 Only useful for JS triggering of type="inpage", as it's passing the jQuery object of the element you wish to put into the modal (just means a tiny bit less jQuery object creation if you've already done it)
 
     title
-The text to add into the modal header. Yes it can be HTML is you really want
+The text to add into the modal header. Yes it can be HTML if you really want
 
     noClose
 Set to 'true' if you'd prefer not to have a close box link in the modal header.
@@ -99,7 +99,7 @@ If set to 'true', the modal footer will show. Duh. But then if "formurl" or "foo
 HTML to push into the footer. To warn you, p, h3, h4 are all floated left, so they don't mess with any buttons.
 
     formurl
-If you want to add a button form in the pop-up footer, this is the action of the form
+If you want to add a button form in the modal footer, this is the action of the form
 
     formmethod
 The method of the form, defaults to 'POST'
@@ -112,15 +112,13 @@ Ok this is funky. You can add multiple input fields in json form. eg
 {
  'field-name-1':{
   'type':'hidden',
-  'name':'blah',
   'value':'blah',
   'id':'blah',
   'class':'blah',
   'placeholder':'blah'
  },
- 'field-name-1':{
+ 'field-name-2':{
   'type':'hidden',
-  'name':'blah',
   'value':'blah',
   'id':'blah',
   'class':'blah',
@@ -139,5 +137,6 @@ Again, the button is in json form, if a little simpler:
         
 ## Notes
 
-- All the arguments/variables are in lower case, because reading data-types from elements lowercases the keys anyway.
+- All the arguments/variables are
+- need to fix on ipad. VH units seem to take the height of the page, not the viewport on iPad.
 - examples to come.
