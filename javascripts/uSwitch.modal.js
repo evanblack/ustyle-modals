@@ -160,6 +160,9 @@ uSwitch.modal = (function() {
   var resetModal = function(noreset,modal) {
     var modaljq = jqOrId(modal);
     var noreset = noreset || modaljq.data('noreset') || false;
+    var showfooter = false;
+    if (modaljq.hasClass('us-modal-footer'))
+      showfooter = true;
     modaljq.attr('class','').addClass('us-modal-box');
     if (!noreset) {
       modaljq.find('.us-modal-title').text('');
@@ -167,6 +170,8 @@ uSwitch.modal = (function() {
       modaljq.find('footer').text('');
       if (debug)
         console.log('-- us-modal content reset');
+    } else if (showfooter) {
+      modaljq.addClass('us-modal-footer');
     }
   }
 
