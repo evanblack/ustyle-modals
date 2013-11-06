@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html class="us-debug">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
@@ -61,9 +61,11 @@
   <li><a href="#prebuilt-modal" class="us-modal" data-width="xs">"prebuilt" modal (XS size)</a></li>
   <li><a href="#prebuilt-modal" class="us-modal" data-width="xl">"prebuilt" modal (XL size)</a></li>
   <li><a href="#inpage-modal" class="us-modal">"in page" modal</a></li>
+  <li><a href="#inpage-modal" class="us-modal" data-closedirection="right">"in page" modal (slide in from right on a small screen)</a></li>
+  <li><a href="#inpage-modal" class="us-modal" data-closedirection="bottom">"in page" modal (slide in from bottom on a small screen)</a></li>
   <li><a href="ajax.html" class="us-modal">"ajax" modal (whole document)</a></li>
   <li><a href="ajax.html" class="us-modal" data-targetextra="#drilldown">"ajax" modal (specific element in document)</a></li>
-  <li><a href="ajax.html" class="us-modal" data-type="ajax" data-targetextra="#drilldown" data-width="l" data-title="more complex ajax" data-modalclass="red-header">"ajax" modal with more options</a></li>
+  <li><a href="ajax.html" class="us-modal" data-type="ajax" data-targetextra="#drilldown" data-width="l" data-title="more complex ajax" data-closedirection="bottom" data-modalclass="red-header">"ajax" modal with more options</a></li>
   <li><a href="ajax.html" class="us-modal" data-footerhtml="<h3>This modal has footer html!</h3>">with footer HTML</a></li>
   <li><a href="ajax.html" class="us-modal" data-formhtml="<h3>Don't delay...</h3>" data-formurl="#" data-forminputs="{'HIDDEN-INPUT-1':{'type':'hidden','value':'hidden!!'},'HIDDEN-INPUT-2':{'type':'hidden','value':'also hidden!!'}}" data-formbutton="{'class':'btn_green btn_arrowed','text':'click now!'}">with a footer form</a></li>
 </ol>
@@ -85,6 +87,7 @@ $('#js-example1').click(function(){
     'width':'xl',
     'title':'JS triggered',
     'modalclass':'green-footer',
+    'closedirection':'right',
     'formhtml':'&lt;h3&gt;Don\'t delay...&lt;/h3&gt;',
     'formurl':'#',
     'forminputs':{
@@ -146,6 +149,7 @@ $('#js-example1').click(function(){
           'width':'xl',
           'title':'JS triggered',
           'modalclass':'green-footer',
+          'closedirection':'right',
           'formhtml':'<h3>Don\'t delay...</h3>',
           'formurl':'#',
           'forminputs':{

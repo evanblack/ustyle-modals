@@ -216,7 +216,12 @@ uSwitch.modal = (function() {
       var spinTarget = $('#us-modal-loading')[0];
       var spinner = new Spinner(opts).spin(spinTarget);
     }
-    modaljq.find('.us-modal-content').load(target,function() {
+    modaljq.find('.us-modal-content').load(target,function(responseText, textStatus, req) {
+      if (textStatus == "error") {
+        alert('sorry - we are unable to load the pop-up')
+        closeModal();
+        return;
+      }
       // remove spinner
       $('#us-spin-container').remove();
       if (debug)
@@ -273,6 +278,7 @@ uSwitch.modal = (function() {
     var targetextra = config.targetextra || false; // used in ajax requests, a CSS selector modifier that only retrieves a specific element of a page.
     var title = config.title || false; // title bar of modal
     var noclose = config.noclose || false; // hide the close button in the modal header. should be true or false
+    var closedirection = config.closedirection || false; // on small screens, what is the direction of close. default (false) is a scale fade (just like desktop). options are 'right' or 'bottom' to zoom the sheet off a side of the screen instead
     var formurl = config.formurl || false;
     var footerhtml = config.footerhtml || '';
     // look to setModalFooter for additional config for setting up the modal footer
@@ -319,8 +325,8 @@ uSwitch.modal = (function() {
     if (showfooter)
       setModalFooter(config,modaljq);
     // open modal/set the width
-    rootjq.addClass('us-modal-ready');
-    modaljq.addClass('us-modal-ready us-modal-' + width + (noclose?' us-modal-noclose':'') + (showfooter?' us-modal-footer':'') + (modalclass?' ' + modalclass:''));
+    rootjq.addClass('us-modal-ready us-modal-' + width );
+    modaljq.addClass('us-modal-ready us-modal-' + width + (noclose?' us-modal-noclose':'') + (showfooter?' us-modal-footer':'') + (closedirection?' us-modal-dir-' + closedirection:'') + (modalclass?' ' + modalclass:''));
     setTimeout(function(){
       rootjq.removeClass('us-modal-ready').addClass('us-modal-on');
       modaljq.removeClass('us-modal-ready').addClass('us-modal-on');
@@ -335,11 +341,13 @@ uSwitch.modal = (function() {
     } else {
       var modaljq = $('.us-modal-box');
     }
-    rootjq.removeClass('us-modal-on');
+    rootjq.removeClass(function (index, css) {
+      return (css.match (/\bus-modal-\S+/g) || []).join(' ');
+    });
     modaljq.removeClass('us-modal-on').addClass('us-modal-ready');
     setTimeout(function(){
-      rootjq.removeClass('us-modal-ready');
-      modaljq.removeClass('us-modal-ready');
+      rootjq.removeClass('us-modal-on us-modal-ready');
+      modaljq.removeClass('us-modal-on us-modal-ready');
       resetModal(false,modaljq);
     },400);
   }
