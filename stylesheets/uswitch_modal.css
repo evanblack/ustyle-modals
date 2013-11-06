@@ -403,6 +403,14 @@
     bottom: 0;
     max-height: 9999em;
   }
+  /* line 245, ../../../app/assets/stylesheets/_uswitch_modal.sass */
+  .us-modal-box.us-modal-m.us-modal-footer .us-modal-content {
+    bottom: 72px;
+  }
+  /* line 247, ../../../app/assets/stylesheets/_uswitch_modal.sass */
+  .us-modal-box.us-modal-m.us-modal-footer footer {
+    bottom: 0;
+  }
 }
 @media screen and (max-width: 600px) and (max-height: 650px) {
   /* line 288, ../../../app/assets/stylesheets/_uswitch_modal.sass */
