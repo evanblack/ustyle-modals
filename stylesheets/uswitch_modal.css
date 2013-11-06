@@ -193,8 +193,11 @@
 }
 
 /* line 140, ../../../app/assets/stylesheets/_uswitch_modal.sass */
-.no-touch .us-modal-close:hover {
+.us-modal-close:hover {
   background-position: 0 0;
+}
+.touch .us-modal-close:hover {
+  background-position: 0 100%;
 }
 
 /* line 143, ../../../app/assets/stylesheets/_uswitch_modal.sass */

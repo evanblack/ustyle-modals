@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="us-debug">
+<html>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
@@ -14,14 +14,23 @@
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <style>
+      .us-modal-box.red-header header {
+        background: #E34B30;
+      }
+      .us-modal-box.green-footer footer {
+        background: #68B034;
+      }
+      .us-modal-box.green-footer footer h3 {
+        color: #fff;
+      }
+    </style>
   </head>
   <body>
     <div class="wrapper">
       <header>
         <h1>Ustyle-modals</h1>
         <p>uSwitch repsonsive modal dialog script</p>
-
-        <p class="view"><a href="https://github.com/uswitch/ustyle-modals">View the Project on GitHub <small>uswitch/ustyle-modals</small></a></p>
 
 
         <ul>
@@ -38,33 +47,26 @@
 
 <p>This hosted page is purely for examples. For requirements, installation and usage, see the <a href="https://github.com/uswitch/ustyle-modals">GitHub repo</a>.</p>
 
-<p>Please note if you're using IE9+ or Firefox, you will not see custom web fonts (it's a CORS issue).</p>
+<p>Please note if you're using IE9+ or Firefox, you will not see custom web fonts (it's a CORS issue). Also that debugging is on (the HTML tag has a class of "us-debug"), so the JS console will be delivering lots of messages.</p>
 
 <h2>Examples</h2>
-
-<h3>
-<a name="link-triggered-js" class="anchor" href="#link-triggered-non-js"><span class="octicon octicon-link"></span></a>Link triggered Non-JS</h3>
-
-<p>Not using any JS, only CSS. Requires the modals to be prebuilt and hidden in the page.</p>
-
-<ul>
-  <li><a href="#prebuilt-modal">Non-JS link triggered</a></li>
-</ul>
 
 <h3>
 <a name="link-triggered-non-js" class="anchor" href="#link-triggered-js"><span class="octicon octicon-link"></span></a>Link triggered JS delegated event</h3>
 
 <p>In this mode, you can just add a class to the link you want to trigger the modal.</p>
 
-<ul>
-  <li><a href="#prebuilt-modal" class="us-modal">simple "prebuilt" modal</a></li>
-  <li><a href="#inpage-modal" class="us-modal">simple "in page" modal</a></li>
-  <li><a href="ajax.html" class="us-modal">simple "ajax" modal (whole document)</a></li>
-  <li><a href="ajax.html" class="us-modal" data-targetextra="#drilldown">simple "ajax" modal (specific element in document)</a></li>
-  <li><a href="link-js-complex.html">more complex</a></li>
-  <li><a href="link-js-complex-footer-html.html">with footer HTML</a></li>
-  <li><a href="link-js-complex-footer-form.html">with a footer form</a></li>
-</ul>
+<ol>
+  <li><a href="#prebuilt-modal" class="us-modal">"prebuilt" modal (default - M size)</a></li>
+  <li><a href="#prebuilt-modal" class="us-modal" data-width="xs">"prebuilt" modal (XS size)</a></li>
+  <li><a href="#prebuilt-modal" class="us-modal" data-width="xl">"prebuilt" modal (XL size)</a></li>
+  <li><a href="#inpage-modal" class="us-modal">"in page" modal</a></li>
+  <li><a href="ajax.html" class="us-modal">"ajax" modal (whole document)</a></li>
+  <li><a href="ajax.html" class="us-modal" data-targetextra="#drilldown">"ajax" modal (specific element in document)</a></li>
+  <li><a href="ajax.html" class="us-modal" data-type="ajax" data-targetextra="#drilldown" data-width="l" data-title="more complex ajax" data-modalclass="red-header">"ajax" modal with more options</a></li>
+  <li><a href="ajax.html" class="us-modal" data-footerhtml="<h3>This modal has footer html!</h3>">with footer HTML</a></li>
+  <li><a href="ajax.html" class="us-modal" data-formhtml="<h3>Don't delay...</h3>" data-formurl="#" data-forminputs="{'HIDDEN-INPUT-1':{'type':'hidden','value':'hidden!!'},'HIDDEN-INPUT-2':{'type':'hidden','value':'also hidden!!'}}" data-formbutton="{'class':'btn_green btn_arrowed','text':'click now!'}">with a footer form</a></li>
+</ol>
 
 <h3>
 <a name="link-triggered-non-js" class="anchor" href="#link-triggered-js"><span class="octicon octicon-link"></span></a>JS triggered</h3>
@@ -72,8 +74,37 @@
 <p>You can also trigger a modal programmatically in JS, with exactly the same options.</p>
 
 <ul>
-  <li><a href="js-simple.html">JS triggered</a></li>
+  <li><a href="#!" id="js-example1">JS triggered (all the options!)</a></li>
 </ul>
+
+<pre>
+$('#js-example1').click(function(){
+  uSwitch.modal.openModal(false,{
+    'type':'ajax',
+    'target':'ajax.html',
+    'width':'xl',
+    'title':'JS triggered',
+    'modalclass':'green-footer',
+    'formhtml':'&lt;h3&gt;Don\'t delay...&lt;/h3&gt;',
+    'formurl':'#',
+    'forminputs':{
+        'HIDDEN-INPUT-1':{
+          'type':'hidden',
+          'value':'hidden!!'
+        },
+        'HIDDEN-INPUT-2':{
+          'type':'hidden',
+          'value':'also hidden!!'
+        }
+      },
+    'formbutton': {
+      'class':'btn_green btn_arrowed',
+      'text':'click now!'
+    },
+    'formhtml':'&lt;h3&gt;Don\'t delay...&lt;/h3&gt;'
+  });
+})
+</pre>
 
 <section id="prebuilt-modal" class="us-modal-box us-modal-footer" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true" style="display:none;">
   <header>
@@ -105,7 +136,36 @@
     </div>
     <script src="javascripts/scale.fix.js"></script>
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js'></script>
+    <script src="javascripts/spin.min.js"></script>
     <script src="javascripts/uSwitch.modal.js"></script>
+    <script>
+      $('#js-example1').click(function(){
+        uSwitch.modal.openModal(false,{
+          'type':'ajax',
+          'target':'ajax.html',
+          'width':'xl',
+          'title':'JS triggered',
+          'modalclass':'green-footer',
+          'formhtml':'<h3>Don\'t delay...</h3>',
+          'formurl':'#',
+          'forminputs':{
+              'HIDDEN-INPUT-1':{
+                'type':'hidden',
+                'value':'hidden!!'
+              },
+              'HIDDEN-INPUT-2':{
+                'type':'hidden',
+                'value':'also hidden!!'
+              }
+            },
+          'formbutton': {
+            'class':'btn_green btn_arrowed',
+            'text':'click now!'
+          },
+          'formhtml':'<h3>Don\'t delay...</h3>'
+        });
+      })
+    </script>
     
   </body>
 </html>

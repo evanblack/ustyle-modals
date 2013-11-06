@@ -2,8 +2,6 @@ var uSwitch = uSwitch || {};
 
 uSwitch.modal = (function() {
 
-  // v0.5
-
   var modalDefaultId = '#us-modal-0';
   var modalLinks = $('.us-modal');
   var debug = false;
@@ -42,16 +40,17 @@ uSwitch.modal = (function() {
           needWorkCounter++;
         } else {
           createOverlay();
-          console.log('-- us-modal prebuilt modal found in page - may not require scaffold');
+          if (debug)
+            console.log('-- us-modal prebuilt modal found in page - may not require scaffold setup');
         }
       }
-      // if needed, create a hidden modal ready for use
-      if (needWorkCounter > 0) {
-        if (debug)
-          console.log('-- us-modal required setup');
-        createModal();
-      }
     })
+    // if needed, create a hidden modal ready for use
+    if (needWorkCounter > 0) {
+      if (debug)
+        console.log('-- us-modal link found, scaffold setup required');
+      createModal();
+    }
   }
 
   // build the scaffold of a modal hidden in the page
@@ -92,7 +91,7 @@ uSwitch.modal = (function() {
     $('body').on('click','.us-modal-close',function() {
       if (debug)
         console.log('-- us-modal CLICK TO CLOSE');
-      closeModal();
+      closeModal($(this).closest('.us-modal-box'));
     })
     // clicking the modal background mask also closes the modal
     $('body').on('click','.us-modal-overlay',function() {
@@ -117,6 +116,8 @@ uSwitch.modal = (function() {
   var readJsonConfig = function(jsonRaw) {
     if (!jsonRaw)
       return;
+    if (typeof jsonRaw == 'object')
+      return jsonRaw;
     jsonClean = jsonRaw.replace(/\'/g,'"');
     jsonObj = JSON && JSON.parse(jsonClean) || $.parseJSON(jsonClean);
     return jsonObj;
@@ -227,16 +228,17 @@ uSwitch.modal = (function() {
     var config = config || {};
     var modalid = config.modalid || modalDefaultId;
     var modaljq = $(modalid);
-    var footerhtml = config.footerhtml || false;
+    var footerhtml = config.footerhtml || '';
     var formmethod = config.formmethod || 'POST';
     var formurl = config.formurl || false;
-    var formhtml = config.formhtml || false;
+    var formhtml = config.formhtml || '';
     var forminputs = readJsonConfig(config.forminputs) || {};
     var formbutton = readJsonConfig(config.formbutton) || {};
     formbutton.text = formbutton.text || 'submit';
-    if (debug)
+    if (debug) {
       console.log('-- us-modal config with footer');
       console.log(config);
+    }
     // form instead of html?
     if (!footerhtml && formurl) {
       footerhtml = '<form action="' + formurl + '" method="' + formmethod + '">';
@@ -253,9 +255,10 @@ uSwitch.modal = (function() {
   // open a modal
   var openModal = function(link,config) {
     var config = config || readLinkConfig(link) || {};
-    if (debug)
+    if (debug) {
       console.log('-- us-modal first pass config:');
       console.log(config);
+    }
     var modalid = config.modalid || modalDefaultId; // by default there's only one modal in the page. But this allows the option to call multiple hidden prebuilt modals.
     var modalclass = config.modalclass || false; // extra classes to add to the modal (eg 'footer-green big-text')
     var type = config.type || false; // the type of content to pull into the modal. Choose from 'inpage' (pull a hidden ID into the modal), 'ajax', 'iframe' or 'prebuilt' (the modal is self-contained, prebuilt and hidden). Default is 'prebuilt'.
@@ -266,7 +269,7 @@ uSwitch.modal = (function() {
     var title = config.title || false; // title bar of modal
     var noclose = config.noclose || false; // hide the close button in the modal header. should be true or false
     var formurl = config.formurl || false;
-    var footerhtml = config.footerhtml || false;
+    var footerhtml = config.footerhtml || '';
     // look to setModalFooter for additional config for setting up the modal footer
     var showfooter = config.showfooter || false; // show the modal footer. should be true or false
     if (!showfooter && (formurl || footerhtml)) // if we don't ask to show the footer, but do have a form or html, add the footer in anyway
@@ -279,10 +282,11 @@ uSwitch.modal = (function() {
       noreset = true;
     // let the modal know if it shouldn't have the data reset on close either
     if (noreset)
-      modaljq.data('noreset','1');
-    if (debug)
+      modaljq.attr('data-noreset','1');
+    if (debug) {
       console.log('-- us-modal second pass config:');
       console.log(config);
+    }
     // clear the modal
     if (!noreset)
       resetModal(noreset,modaljq);
