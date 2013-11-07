@@ -196,11 +196,11 @@
     bottom: -50px;
     padding: 8px 16px; }
   .us-modal-box .us-modal-content, .us-modal-xl .us-modal-content, .us-modal-l .us-modal-content, .us-modal-m .us-modal-content, .us-modal-s .us-modal-content, .us-modal-xs .us-modal-content {
-    top: 48px;
+    top: 48px !important;
     max-height: 250px;
     max-height: 62vh; }
   .us-modal-box.us-modal-footer .us-modal-content, .us-modal-xl.us-modal-footer .us-modal-content, .us-modal-l.us-modal-footer .us-modal-content, .us-modal-m.us-modal-footer .us-modal-content, .us-modal-s.us-modal-footer .us-modal-content, .us-modal-xs.us-modal-footer .us-modal-content {
-    bottom: 50px; } }
+    bottom: 50px !important; } }
 /* default responsive block */
 /* width - XL 800px */
 @media screen and (max-width: 800px) {
