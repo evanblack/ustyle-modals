@@ -32,7 +32,7 @@ In this mode, you can just add a class to the link you want to trigger the modal
 
     <a href="/ajax-content.html" class="us-modal">click me</a>
 
-The above will create a 600px wide responsive modal dialog filled with the contents of "/ajax-content.html"
+The above will create a 600px wide responsive modal dialog filled with the contents of "/ajax-content.html". It's the class "us-modal" that turns this from a regular link to a modal link.
 
 You can then add optional extra arguments in the form of data-types (see below for full list)
 
