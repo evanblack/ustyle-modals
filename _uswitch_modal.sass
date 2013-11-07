@@ -4,8 +4,8 @@ $heading-font-bold: "FS Elliot Web Bold", Helvetica, Arial, sans-serif
 $heading-font-regular: "FS Elliot Web Regular", Helvetica, Arial, sans-serif
 $color-overlay: #005a7e
 $color-header-bg: #00B7FF
-$color-close-bg: #3FC9FF
 $color-header-fg: #fff
+$color-close-bg: #3FC9FF
 $color-close-fg: #fff
 $color-close-on: #DF4A3A
 $color-footer-bg: #eee
@@ -197,7 +197,7 @@ $color-footer-fg: #333
 /* smaller headers/footers */
 
 @media screen and (max-height: 650px), screen and (max-width: 800px)
-  .us-modal-box,.us-modal-box.us-modal-xl,.us-modal-box.us-modal-l,.us-modal-box.us-modal-m,.us-modal-box.us-modal-s,.us-modal-box.us-modal-xs
+  .us-modal-box,.us-modal-xl,.us-modal-l,.us-modal-m,.us-modal-s,.us-modal-xs
     header
       padding-top: 0.4em
       padding-bottom: 0.2em
@@ -206,12 +206,12 @@ $color-footer-fg: #333
       bottom: -50px
       padding: 8px 16px
     .us-modal-content
-      top: 48px
+      top: 48px !important
       max-height: 250px
       max-height: 62vh
     &.us-modal-footer
       .us-modal-content
-        bottom: 50px
+        bottom: 50px !important
 
 /* default responsive block */
 
@@ -239,7 +239,7 @@ $color-footer-fg: #333
     left: 0
     right: 0
     bottom: 0
-    max-height: 9999em
+    max-height: 9999em !important
   &.us-modal-footer
     .us-modal-content
       bottom: 72px
