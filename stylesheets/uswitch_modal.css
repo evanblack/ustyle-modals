@@ -231,7 +231,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      max-height: 9999em; }
+      max-height: 9999em !important; }
     .us-modal-xl.us-modal-footer .us-modal-content {
       bottom: 72px; }
     .us-modal-xl.us-modal-footer footer {
@@ -265,7 +265,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      max-height: 9999em; }
+      max-height: 9999em !important; }
     .us-modal-l.us-modal-footer .us-modal-content {
       bottom: 72px; }
     .us-modal-l.us-modal-footer footer {
@@ -299,7 +299,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      max-height: 9999em; }
+      max-height: 9999em !important; }
     .us-modal-m.us-modal-footer .us-modal-content {
       bottom: 72px; }
     .us-modal-m.us-modal-footer footer {
@@ -333,7 +333,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      max-height: 9999em; }
+      max-height: 9999em !important; }
     .us-modal-s.us-modal-footer .us-modal-content {
       bottom: 72px; }
     .us-modal-s.us-modal-footer footer {
@@ -367,7 +367,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      max-height: 9999em; }
+      max-height: 9999em !important; }
     .us-modal-xs.us-modal-footer .us-modal-content {
       bottom: 72px; }
     .us-modal-xs.us-modal-footer footer {
