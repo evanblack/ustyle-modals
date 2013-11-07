@@ -1,7 +1,22 @@
+/* uswitch modals v0.5 - https://github.com/uswitch/ustyle-modals */
+
+$heading-font-bold: "FS Elliot Web Bold", Helvetica, Arial, sans-serif
+$heading-font-regular: "FS Elliot Web Regular", Helvetica, Arial, sans-serif
+$color-overlay: #005a7e
+$color-header-bg: #00B7FF
+$color-close-bg: #3FC9FF
+$color-header-fg: #fff
+$color-close-fg: #fff
+$color-close-on: #DF4A3A
+$color-footer-bg: #eee
+$color-footer-fg: #333
+
+/* lock the viewport height (stops content scrolling on all bar ios) */
 .us-modal-on body
   height: 100%
   overflow: hidden
 
+/* overlay */
 .us-modal-overlay
   display: none
   position: fixed
@@ -10,7 +25,7 @@
   bottom: 0
   left: 0
   z-index: 9998
-  background-color: #005a7e
+  background-color: $color-overlay
   opacity: 0
   -webkit-transition: opacity 0.4s
   -moz-transition: opacity 0.4s
@@ -20,6 +35,8 @@
   .us-modal-on &
     display: block
     opacity: 0.7
+
+/* modal box */
 .us-modal-box
   display: none
   position: fixed
@@ -33,30 +50,38 @@
   background: #fff
   opacity: 0
   overflow: visible
-  +boxsizing(border-box)
   -webkit-transform: scale(0.9)
   -moz-transform: scale(0.9)
   transform: scale(0.9)
   -webkit-transition: opacity,-webkit-transform 0.2s,0.2s
   -moz-transition: opacity,-moz-transform 0.2s,0.2s
   transition: opacity,transform 0.2s,0.2s
-  .us-modal-ready &
-    display: block
-  .us-modal-on &
-    display: block
+  &.us-modal-ready
+    display: block !important
+  &.us-modal-on,&.us-modal-on.us-modal-dir-bottom,&.us-modal-on.us-modal-dir-right
+    display: block !important
     opacity: 1
     -webkit-transform: scale(1) translateY(0)
     -moz-transform: scale(1) translateY(0)
     transform: scale(1) translateY(0)
+  /* header */
   header,footer
-    padding: 0.3em 2.3em 0.3em 0.5em
-    min-height: 1.4em
     position: relative
+    float: none
+    width: auto
+    min-height: 1.4em
+    margin: 0
+    padding: 0.3em 2.3em 0.3em 0.5em
     color: #fff
-    background-color: #00B7FF
+    background-color: $color-header-bg
     font-family: $heading-font-regular
     font-size: 36px
     font-weight: normal
+  .us-modal-title
+    margin: 0
+    color: $color-header-fg
+    font-size: 1em
+  /* footer */
   footer
     display: none
     position: absolute
@@ -65,13 +90,14 @@
     right: 0
     height: 34px
     padding: 14px 16px
-    color: #333
-    background-color: #eee
+    color: $color-footer-fg
+    background-color: $color-footer-bg
     font-size: 1em
     h3,h4
       float: left
       font-size: 1.2em
       margin: 0.3em 0
+      color: $color-footer-fg
       font-family: $heading-font-bold
       font-weight: normal
     h4
@@ -80,13 +106,16 @@
     p
       float: left
       margin: 0.5em 0
+      color: $color-footer-fg
     b 
+      color: $color-footer-fg
       font-family: $heading-font-bold
       font-weight: normal
     button
       float: right
   h2
     font-weight: normal
+/* window sizes */
 .us-modal-xs
   width: 400px
   margin-left: -200px
@@ -99,22 +128,19 @@
 .us-modal-xl
   width: 800px
   margin-left: -400px
-.us-modal-title
-  margin: 0
-  font-size: 1em
+/* close link */
 .us-modal-close
   position: absolute
   right: 0
   top: 0
   bottom: 0
   width: 2em
-  background-color: #3FC9FF
-  
-  background: -moz-linear-gradient(top, #DF4A3A 0%, #DF4A3A 50%, #3FC9FF 50%, #3FC9FF 100%) /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#DF4A3A), color-stop(50%,#DF4A3A), color-stop(50%,#3FC9FF), color-stop(100%,#3FC9FF)) /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, #DF4A3A 0%,#DF4A3A 50%,#3FC9FF 50%,#3FC9FF 100%) /* Chrome10+,Safari5.1+ */
-  background: -ms-linear-gradient(top, #DF4A3A 0%,#DF4A3A 50%,#3FC9FF 50%,#3FC9FF 100%) /* IE10+ */
-  background: linear-gradient(to bottom, #DF4A3A 0%,#DF4A3A 50%,#3FC9FF 50%,#3FC9FF 100%) /* W3C */
+  background-color: $color-close-bg
+  background: -moz-linear-gradient(top, $color-close-on 0%, $color-close-on 50%, $color-close-bg 50%, $color-close-bg 100%) /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$color-close-on), color-stop(50%,$color-close-on), color-stop(50%,$color-close-bg), color-stop(100%,$color-close-bg)) /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, $color-close-on 0%,$color-close-on 50%,$color-close-bg 50%,$color-close-bg 100%) /* Chrome10+,Safari5.1+ */
+  background: -ms-linear-gradient(top, $color-close-on 0%,$color-close-on 50%,$color-close-bg 50%,$color-close-bg 100%) /* IE10+ */
+  background: linear-gradient(to bottom, $color-close-on 0%,$color-close-on 50%,$color-close-bg 50%,$color-close-bg 100%) /* W3C */
   background-size: 100% 200%
   background-position: 0 100%
 
@@ -124,251 +150,138 @@
   -moz-transition: background-position 200ms
   transition: background-position 200ms
 
-  -webkit-tap-highlight-color: #DF4A3A
+  -webkit-tap-highlight-color: $color-close-on
   &:before
     position: absolute
     top: 0.5em
     left: 0
     right: 0
     content: "\2715"
-    color: #fff
+    color: $color-close-fg
     font-family: "uswitch-icon"
     font-size: 1em
     text-indent: 0
     text-align: center
     line-height: 1
-.no-touch .us-modal-close:hover
-  background-position: 0 0
+  &:hover
+    background-position: 0 0
+    .touch &
+      background-position: 0 100%
+
+/* if no close link */
 .us-modal-noclose 
   header
     margin-right: 0.5em
   .us-modal-close
     display: none
+/* scrollable content area */
 .us-modal-content
   max-height: 420px
   max-height: 78vh
   padding: 1.2em
   overflow: auto
+  -webkit-overflow-scrolling: touch
+/* footer */
 .us-modal-footer
   .us-modal-content
     max-height: 350px
     max-height: 62vh
   footer
     display: block
+/* loading spinner */
 #us-modal-loading
   width: 1px 
   height: 35px
   margin: 40px auto 10px
 
+/* smaller headers/footers */
 
-// vertical squish
-
-@media screen and (max-height: 650px)
-  .us-modal-box,.us-modal-xl
+@media screen and (max-height: 650px), screen and (max-width: 800px)
+  .us-modal-box,.us-modal-box.us-modal-xl,.us-modal-box.us-modal-l,.us-modal-box.us-modal-m,.us-modal-box.us-modal-s,.us-modal-box.us-modal-xs
     header
+      padding-top: 0.4em
+      padding-bottom: 0.2em
       font-size: 24px
     footer
       bottom: -50px
       padding: 8px 16px
+    .us-modal-content
+      top: 48px
+      max-height: 250px
+      max-height: 62vh
+    &.us-modal-footer
+      .us-modal-content
+        bottom: 50px
+
+/* default responsive block */
+
+@mixin us-modal-responsive
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  width: auto
+  max-height: 100%
+  margin: 0
+  &.us-modal-dir-bottom
+    opacity: 1
+    -webkit-transform: translateY(110%)
+    -moz-transform: translateY(110%)
+    transform: translateY(110%)
+  &.us-modal-dir-right
+    opacity: 1
+    -webkit-transform: translateX(110%)
+    -moz-transform: translateX(110%)
+    transform: translateX(110%)
   .us-modal-content
-    max-height: 250px
-    max-height: 62vh
+    position: absolute
+    top: 72px
+    left: 0
+    right: 0
+    bottom: 0
+    max-height: 9999em
+  &.us-modal-footer
+    .us-modal-content
+      bottom: 72px
+    footer
+      bottom: 0
 
-
-// width - XL 800px
+/* width - XL 800px */
 
 @media screen and (max-width: 800px)
-  .us-modal-on .us-modal-overlay
+  .us-modal-on.us-modal-root-xl .us-modal-overlay
     display: none
   .us-modal-xl 
-    top: 0
-    left: 0
-    right: 0
-    bottom: 0
-    width: auto
-    max-height: 100%
-    margin: 0
-    opacity: 1
-    -webkit-transform: translateY(110%)
-    -moz-transform: translateY(110%)
-    transform: translateY(110%)
-    -webkit-overflow-scrolling: touch
-    .us-modal-content
-      position: absolute
-      top: 72px
-      left: 0
-      right: 0
-      bottom: 0
-      max-height: 9999em
-    &.us-modal-footer
-      .us-modal-content
-        bottom: 72px
-      footer
-        bottom: 0
+    @include us-modal-responsive
 
-@media screen and (max-width: 800px) and (max-height: 650px)
-  .us-modal-box.us-modal-xl 
-    .us-modal-content
-      top: 48px
-    &.us-modal-footer
-      .us-modal-content
-        bottom: 50px
-
-
-
-// width - L 700px
+/* width - L 700px */
 
 @media screen and (max-width: 700px)
-  .us-modal-on .us-modal-overlay
+  .us-modal-on.us-modal-root-l  .us-modal-overlay
     display: none
   .us-modal-l 
-    top: 0
-    left: 0
-    right: 0
-    bottom: 0
-    width: auto
-    max-height: 100%
-    margin: 0
-    opacity: 1
-    -webkit-transform: translateY(110%)
-    -moz-transform: translateY(110%)
-    transform: translateY(110%)
-    -webkit-overflow-scrolling: touch
-    .us-modal-content
-      position: absolute
-      top: 72px
-      left: 0
-      right: 0
-      bottom: 0
-      max-height: 9999em
-    &.us-modal-footer
-      .us-modal-content
-        bottom: 72px
-      footer
-        bottom: 0
+    @include us-modal-responsive
 
-@media screen and (max-width: 700px) and (max-height: 650px)
-  .us-modal-box.us-modal-l 
-    .us-modal-content
-      top: 48px
-    &.us-modal-footer
-      .us-modal-content
-        bottom: 50px
-
-
-
-// width - M (default) 600px
+/* width - M (default) 600px */
 
 @media screen and (max-width: 600px)
-  .us-modal-on .us-modal-overlay
+  .us-modal-on.us-modal-root-m .us-modal-overlay
     display: none
-  .us-modal-box 
-    top: 0
-    left: 0
-    right: 0
-    bottom: 0
-    width: auto
-    max-height: 100%
-    margin: 0
-    opacity: 1
-    -webkit-transform: translateY(110%)
-    -moz-transform: translateY(110%)
-    transform: translateY(110%)
-    -webkit-overflow-scrolling: touch
-    .us-modal-content
-      position: absolute
-      top: 72px
-      left: 0
-      right: 0
-      bottom: 0
-      max-height: 9999em
+  .us-modal-m
+    @include us-modal-responsive
 
-@media screen and (max-width: 600px) and (max-height: 650px)
-  .us-modal-box 
-    .us-modal-content
-      top: 48px
-    &.us-modal-footer
-      .us-modal-content
-        bottom: 50px
-
-
-
-// width - S 500px
+/* width - S 500px */
 
 @media screen and (max-width: 500px)
-  .us-modal-on .us-modal-overlay
+  .us-modal-on.us-modal-root-s .us-modal-overlay
     display: none
   .us-modal-s 
-    top: 0
-    left: 0
-    right: 0
-    bottom: 0
-    width: auto
-    max-height: 100%
-    margin: 0
-    opacity: 1
-    -webkit-transform: translateY(110%)
-    -moz-transform: translateY(110%)
-    transform: translateY(110%)
-    -webkit-overflow-scrolling: touch
-    .us-modal-content
-      position: absolute
-      top: 72px
-      left: 0
-      right: 0
-      bottom: 0
-      max-height: 9999em
-    &.us-modal-footer
-      .us-modal-content
-        bottom: 72px
-      footer
-        bottom: 0
+    @include us-modal-responsive
 
-@media screen and (max-width: 500px) and (max-height: 650px)
-  .us-modal-box.us-modal-s
-    .us-modal-content
-      top: 48px
-    &.us-modal-footer
-      .us-modal-content
-        bottom: 50px
-
-
-
-// width - XS 400px
+/* width - XS 400px */
 
 @media screen and (max-width: 400px)
-  .us-modal-on .us-modal-overlay
+  .us-modal-on.us-modal-root-xs .us-modal-overlay
     display: none
   .us-modal-xs 
-    top: 0
-    left: 0
-    right: 0
-    bottom: 0
-    width: auto
-    max-height: 100%
-    margin: 0
-    opacity: 1
-    -webkit-transform: translateY(110%)
-    -moz-transform: translateY(110%)
-    transform: translateY(110%)
-    -webkit-overflow-scrolling: touch
-    .us-modal-content
-      position: absolute
-      top: 72px
-      left: 0
-      right: 0
-      bottom: 0
-      max-height: 9999em
-    &.us-modal-footer
-      .us-modal-content
-        bottom: 72px
-      footer
-        bottom: 0
-
-@media screen and (max-width: 400px) and (max-height: 650px)
-  .us-modal-box.us-modal-xs
-    .us-modal-content
-      top: 48px
-    &.us-modal-footer
-      .us-modal-content
-        bottom: 50px
+    @include us-modal-responsive
