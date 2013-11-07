@@ -237,7 +237,7 @@
   margin: 40px auto 10px;
 }
 
-@media screen and (max-height: 650px) {
+@media screen and (max-height: 650px), screen and (max-width: 800px) {
   /* line 168, ../../../app/assets/stylesheets/_uswitch_modal.sass */
   .us-modal-box header, .us-modal-xl header {
     font-size: 24px;
