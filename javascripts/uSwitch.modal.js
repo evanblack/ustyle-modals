@@ -1,3 +1,5 @@
+/* uswitch modals v0.5 - https://github.com/uswitch/ustyle-modals */
+
 var uSwitch = uSwitch || {};
 
 uSwitch.modal = (function() {
@@ -14,7 +16,7 @@ uSwitch.modal = (function() {
       console.log('-- us-modal init');
     setupModal(forceSetUp);
     setupClicks();
-  }
+  };
 
   // determine if there is a need for modals in the page
   var setupModal = function(forceSetUp) {
@@ -36,7 +38,7 @@ uSwitch.modal = (function() {
       // if it is an internal anchor, check to see if it's a 'prebuilt', or if it's just any old internal anchor
       } else {
         var anchor = link.substring(1);
-        if ($(link + '.us-modal-box').length == 0) {
+        if ($(link + '.us-modal-box').length === 0) {
           needWorkCounter++;
         } else {
           createOverlay();
@@ -44,14 +46,14 @@ uSwitch.modal = (function() {
             console.log('-- us-modal prebuilt modal found in page - may not require scaffold setup');
         }
       }
-    })
+    });
     // if needed, create a hidden modal ready for use
     if (needWorkCounter > 0) {
       if (debug)
         console.log('-- us-modal link found, scaffold setup required');
       createModal();
     }
-  }
+  };
 
   // build the scaffold of a modal hidden in the page
   var createModal = function() {
@@ -68,15 +70,15 @@ uSwitch.modal = (function() {
     $('body').append(modalScaffold);
     if (debug)
       console.log('-- us-modal setup modal scaffold');
-  }
+  };
 
   var createOverlay = function() {
-    if ($('#us-modal-overlay').length==0) {
+    if ($('#us-modal-overlay').length === 0) {
       $('body').append('<div id="us-modal-overlay" class="us-modal-overlay" tabindex="-1" aria-hidden="true"></div>');
       if (debug)
         console.log('-- us-modal setup overlay');
     }
-  }
+  };
 
   // event handlers
   var setupClicks = function() {
@@ -86,42 +88,45 @@ uSwitch.modal = (function() {
         console.log('-- us-modal CLICK TO OPEN');
       event.preventDefault();
       openModal(this);
-    })
+    });
     // close modal link
     $('body').on('click','.us-modal-close',function() {
       if (debug)
         console.log('-- us-modal CLICK TO CLOSE');
       closeModal($(this).closest('.us-modal-box'));
-    })
+    });
     // clicking the modal background mask also closes the modal
     $('body').on('click','.us-modal-overlay',function() {
       if (debug)
         console.log('-- us-modal CLICK TO CLOSE FROM OVERLAY');
       closeModal();
-    })
-  }
+    });
+  };
 
   // helper that allows us to pass around both straight ids/classes (eg "#modal-signup", ".modal-signup") or jQuery objects (eg $('#modal-signup'))
   var jqOrId = function(undecided) {
+    var nodeJQ = false;
     if (undecided instanceof jQuery) {
-      var nodeJQ = undecided;
+      nodeJQ = undecided;
     } else {
       var nodeId = undecided || modalDefaultId;
-      var nodeJQ = $(nodeId);
+      nodeJQ = $(nodeId);
     }
     return nodeJQ;
-  }
+  };
 
-  // 
+  // read string encoded json, convert it to a json object
   var readJsonConfig = function(jsonRaw) {
     if (!jsonRaw)
       return;
-    if (typeof jsonRaw == 'object')
+    if (typeof jsonRaw === 'object')
       return jsonRaw;
-    jsonClean = jsonRaw.replace(/\'/g,'"');
-    jsonObj = JSON && JSON.parse(jsonClean) || $.parseJSON(jsonClean);
+    jsonRaw = jsonRaw.replace(/\"/g,'~~');  // mask double quotes
+    var jsonClean = jsonRaw.replace(/\'/g,'"');
+    jsonClean = jsonClean.replace(/\~~/g,'\"');
+    var jsonObj = JSON && JSON.parse(jsonClean) || $.parseJSON(jsonClean);
     return jsonObj;
-  }
+  };
 
   // if the config for the modal is in the form of data-type="" attributes on the link, read it into an object and fill in any important gaps
   var readLinkConfig = function(link) {
@@ -133,7 +138,7 @@ uSwitch.modal = (function() {
     }
     // fill in gaps: if we're not given a config.type, try and figure it out by the target given (ie the url or selector in the href)
     if (!config.type) {
-      if (config.target.indexOf('#') == 0 || config.target.indexOf('.') == 0) {
+      if (config.target.indexOf('#') === 0 || config.target.indexOf('.') === 0) {
         var contentJQ = $(config.target);
         if (contentJQ.length<1) {
           alert('sorry, unable to find the content you clicked on');
@@ -154,12 +159,12 @@ uSwitch.modal = (function() {
     if (debug)
       console.log('-- us-modal read modal config from link');
     return config;
-  }
+  };
 
   // clean the modal of content after it's closed
   var resetModal = function(noreset,modal) {
     var modaljq = jqOrId(modal);
-    var noreset = noreset || modaljq.data('noreset') || false;
+    noreset = noreset || modaljq.data('noreset') || false;
     var showfooter = false;
     if (modaljq.hasClass('us-modal-footer'))
       showfooter = true;
@@ -173,22 +178,22 @@ uSwitch.modal = (function() {
     } else if (showfooter) {
       modaljq.addClass('us-modal-footer');
     }
-  }
+  };
 
   // set the modal title bar
   var setModalTitle = function(title,modal) {
     if (!title)
-      return
+      return;
     var modaljq = jqOrId(modal);
     modaljq.find('.us-modal-title').html(title);
-  }
+  };
 
   // set the modal content (type: inpage)
   var setModalContentInPage = function(targetjq,modal) {
     var modaljq = jqOrId(modal);
     var content = targetjq.first().clone().css('display','block');
     modaljq.find('.us-modal-content').append(content);
-  }
+  };
 
   // set the modal content (type: ajax)
   var setModalContentAjax = function(target,modal) {
@@ -217,8 +222,8 @@ uSwitch.modal = (function() {
       var spinner = new Spinner(opts).spin(spinTarget);
     }
     modaljq.find('.us-modal-content').load(target,function(responseText, textStatus, req) {
-      if (textStatus == "error") {
-        alert('sorry - we are unable to load the pop-up')
+      if (textStatus === "error") {
+        alert('sorry - we are unable to load the pop-up');
         closeModal();
         return;
       }
@@ -227,12 +232,12 @@ uSwitch.modal = (function() {
       if (debug)
         console.log('-- us-modal ajax complete');
     });
-  }
+  };
 
   // set the modal content (type: iframe)
   var setModalContentIframe = function(target,modal) {
     alert('NOT DONE!');
-  }
+  };
 
   var setModalFooter = function(config) {
     var config = config || {};
@@ -254,13 +259,13 @@ uSwitch.modal = (function() {
       footerhtml = '<form action="' + formurl + '" method="' + formmethod + '">';
       $.each(forminputs,function(i,el){
         footerhtml += '<input' + ( el['id'] ? ' id="' + el['id'] + '"':'') + ( el['class'] ? ' class="' + el['class'] + '"':'') + ' type="' + el.type + '" name="' + i + '" value="' + el.value + '" placeholder="' + el.placeholder + '" />';
-      })
+      });
       footerhtml += formhtml;
       footerhtml += '<button id="' + formbutton['id'] + '" class="btn ' + formbutton['class'] + '" type="submit">' + formbutton['text'] + '</button>';
       footerhtml += '</form>';
     }
     modaljq.find('footer').append(footerhtml);
-  }
+  };
 
   // open a modal
   var openModal = function(link,config) {
@@ -289,7 +294,7 @@ uSwitch.modal = (function() {
     var rootjq = $('html');
     var modaljq = $(modalid);
     // if we're looking at a prebuilt, make sure it doesn't have it's content wiped
-    if (type=='prebuilt')
+    if (type==='prebuilt')
       noreset = true;
     // let the modal know if it shouldn't have the data reset on close either
     if (noreset)
@@ -325,21 +330,20 @@ uSwitch.modal = (function() {
     if (showfooter)
       setModalFooter(config,modaljq);
     // open modal/set the width
-    rootjq.addClass('us-modal-ready us-modal-' + width );
+    rootjq.addClass('us-modal-ready us-modal-root-' + width );
     modaljq.addClass('us-modal-ready us-modal-' + width + (noclose?' us-modal-noclose':'') + (showfooter?' us-modal-footer':'') + (closedirection?' us-modal-dir-' + closedirection:'') + (modalclass?' ' + modalclass:''));
     setTimeout(function(){
       rootjq.removeClass('us-modal-ready').addClass('us-modal-on');
       modaljq.removeClass('us-modal-ready').addClass('us-modal-on');
     },10);
-  }
+  };
 
   // close a modal
   var closeModal = function(modal) {
     var rootjq = $('html');
+    var modaljq = $('.us-modal-box');
     if (modal) {
-      var modaljq = jqOrId(modal);
-    } else {
-      var modaljq = $('.us-modal-box');
+      modaljq = jqOrId(modal);
     }
     rootjq.removeClass(function (index, css) {
       return (css.match (/\bus-modal-\S+/g) || []).join(' ');
@@ -350,7 +354,7 @@ uSwitch.modal = (function() {
       modaljq.removeClass('us-modal-on us-modal-ready');
       resetModal(false,modaljq);
     },400);
-  }
+  };
   
   return {
     init: init,
