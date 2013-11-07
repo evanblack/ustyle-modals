@@ -188,18 +188,18 @@
 
 /* smaller headers/footers */
 @media screen and (max-height: 650px), screen and (max-width: 800px) {
-  .us-modal-box header, .us-modal-box.us-modal-xl header, .us-modal-box.us-modal-l header, .us-modal-box.us-modal-m header, .us-modal-box.us-modal-s header, .us-modal-box.us-modal-xs header {
+  .us-modal-box header, .us-modal-xl header, .us-modal-l header, .us-modal-m header, .us-modal-s header, .us-modal-xs header {
     padding-top: 0.4em;
     padding-bottom: 0.2em;
     font-size: 24px; }
-  .us-modal-box footer, .us-modal-box.us-modal-xl footer, .us-modal-box.us-modal-l footer, .us-modal-box.us-modal-m footer, .us-modal-box.us-modal-s footer, .us-modal-box.us-modal-xs footer {
+  .us-modal-box footer, .us-modal-xl footer, .us-modal-l footer, .us-modal-m footer, .us-modal-s footer, .us-modal-xs footer {
     bottom: -50px;
     padding: 8px 16px; }
-  .us-modal-box .us-modal-content, .us-modal-box.us-modal-xl .us-modal-content, .us-modal-box.us-modal-l .us-modal-content, .us-modal-box.us-modal-m .us-modal-content, .us-modal-box.us-modal-s .us-modal-content, .us-modal-box.us-modal-xs .us-modal-content {
+  .us-modal-box .us-modal-content, .us-modal-xl .us-modal-content, .us-modal-l .us-modal-content, .us-modal-m .us-modal-content, .us-modal-s .us-modal-content, .us-modal-xs .us-modal-content {
     top: 48px;
     max-height: 250px;
     max-height: 62vh; }
-  .us-modal-box.us-modal-footer .us-modal-content, .us-modal-box.us-modal-xl.us-modal-footer .us-modal-content, .us-modal-box.us-modal-l.us-modal-footer .us-modal-content, .us-modal-box.us-modal-m.us-modal-footer .us-modal-content, .us-modal-box.us-modal-s.us-modal-footer .us-modal-content, .us-modal-box.us-modal-xs.us-modal-footer .us-modal-content {
+  .us-modal-box.us-modal-footer .us-modal-content, .us-modal-xl.us-modal-footer .us-modal-content, .us-modal-l.us-modal-footer .us-modal-content, .us-modal-m.us-modal-footer .us-modal-content, .us-modal-s.us-modal-footer .us-modal-content, .us-modal-xs.us-modal-footer .us-modal-content {
     bottom: 50px; } }
 /* default responsive block */
 /* width - XL 800px */
