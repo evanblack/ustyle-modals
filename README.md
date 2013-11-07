@@ -19,8 +19,8 @@ We used a bundle of different frameworks just for modals (bootstrap, jqueryUI, f
 
 include the js and css:
 
-    <link href='_uswitch_modal.css' media='all' rel='stylesheet' type='text/css' /&gt;
-    <script src='uSwitch.modal.js'&gt;</script&gt;
+    <link href='_uswitch_modal.css' media='all' rel='stylesheet' type='text/css' />
+    <script src='uSwitch.modal.js'></script>
 
 that's it. The javascript is auto-running and you're ready to build a modal pop-up.
 
@@ -30,13 +30,13 @@ that's it. The javascript is auto-running and you're ready to build a modal pop-
 
 In this mode, you can just add a class to the link you want to trigger the modal:
 
-    <a href="/ajax-content.html" class="us-modal"&gt;click me</a&gt;
+    <a href="/ajax-content.html" class="us-modal">click me</a>
 
 The above will create a 600px wide responsive modal dialog filled with the contents of "/ajax-content.html"
 
 You can then add optional extra arguments in the form of data-types (see below for full list)
 
-    <a href="/ajax-content.html" class="us-modal" data-type="ajax" data-width="xl" data-title="Awesome pop-up" data-modalclass="green"&gt;click me</a&gt;
+    <a href="/ajax-content.html" class="us-modal" data-type="ajax" data-width="xl" data-title="Awesome pop-up" data-modalclass="green">click me</a>
 
 ### JS triggered
 
@@ -140,19 +140,19 @@ Again, the button is in a json object, if a little simpler:
 
 If you want to prebuild a modal and put it in the page, here's an example. You don't need to add theoverlay, as that will be generated on "page ready".
 
-    &lt;section id="name-you-modal" class="us-modal-box us-modal-footer us-modal-xl" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true" style="display:none;"&gt;
-      &lt;header&gt;
-        &lt;h2 class="us-modal-title"&gt;This is a prebuilt modal&lt;/h2&gt;
-        &lt;a href="#!" class="us-modal-close"&gt;X&lt;/a&gt;
-      &lt;/header&gt;
-      &lt;div class="us-modal-content"&gt;
-        &lt;h2&gt;This is a "prebuilt" modal&lt;/h2&gt;
-        &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent rhoncus urna vel nunc malesuada, sit amet lacinia augue vulputate. Donec suscipit porta mattis. Quisque varius leo et nibh fermentum, quis aliquam felis scelerisque. Quisque feugiat ligula nunc, in venenatis sem imperdiet at. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Ut ultrices egestas commodo. Suspendisse non consequat odio.&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;footer&gt;
-        &lt;p&gt;Footers here&lt;/p&gt;
-      &lt;/footer&gt;
-    &lt;/section&gt;
+    <section id="name-you-modal" class="us-modal-box us-modal-footer us-modal-xl" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true" style="display:none;">
+      <header>
+        <h2 class="us-modal-title">This is a prebuilt modal</h2>
+        <a href="#!" class="us-modal-close">X</a>
+      </header>
+      <div class="us-modal-content">
+        <h2>This is a "prebuilt" modal</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent rhoncus urna vel nunc malesuada, sit amet lacinia augue vulputate. Donec suscipit porta mattis. Quisque varius leo et nibh fermentum, quis aliquam felis scelerisque. Quisque feugiat ligula nunc, in venenatis sem imperdiet at. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Ut ultrices egestas commodo. Suspendisse non consequat odio.</p>
+      </div>
+      <footer>
+        <p>Footers here</p>
+      </footer>
+    </section>
         
 ## Notes
 
